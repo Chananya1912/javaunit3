@@ -1,0 +1,33 @@
+package com.example.springdi;
+
+public class Student {
+    private Course course;
+
+    // Constructor Injection
+    public Student(Course course) {
+        this.course = course;
+    }
+
+    public void displayInfo() {
+        System.out.println("Student information:");
+        course.showCourse();
+    }
+}
+package com.example.springdi;
+
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+
+@Configuration
+public class AppConfig {
+
+    @Bean
+    public Course course() {
+        return new Course("Spring Framework with Java Config");
+    }
+
+    @Bean
+    public Student student() {
+        return new Student(course());
+    }
+}
